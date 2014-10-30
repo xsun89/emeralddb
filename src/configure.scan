@@ -39,7 +39,7 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_FUNC_STRNLEN
-AC_CHECK_FUNCS([localtime_r memset pow strchr strtol])
+AC_CHECK_FUNCS([gethostbyname localtime_r memset pow socket strchr strtol])
 
 AC_CONFIG_FILES([Makefile
                  bson/Makefile])
