@@ -1,7 +1,7 @@
 #!/bin/sh
-rm configure.in
+rm configure.ac
 autoscan
-cp configure.in.bak configure.in
+cp configure.ac.bak configure.ac
 aclocal
 autoconf
 autoheader
