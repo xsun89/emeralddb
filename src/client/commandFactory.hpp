@@ -8,7 +8,7 @@
 #define COMMAND_ADD(cmdName, cmdClass){                        \
         ICommand* pObj = new cmdClass();                       \
         std::string str = cmdName;                             \
-        _cmdMap.insert(COMMAND_MAP::vlaue_type(str, pObj));    \
+        _cmdMap.insert(COMMAND_MAP::value_type(str, pObj));    \
         }                                                      \
 
 class CommandFactory {

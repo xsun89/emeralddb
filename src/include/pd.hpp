@@ -1,17 +1,17 @@
 /*******************************************************************************
-Copyright (C) 2013 SequoiaDB Software Inc.
+   Copyright (C) 2013 SequoiaDB Software Inc.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License, version 3,
-as published by the Free Software Foundation.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License, version 3,
+   as published by the Free Software Foundation.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/license/>.
+   You should have received a copy of the GNU Affero General Public License
+   along with this program. If not, see <http://www.gnu.org/license/>.
 *******************************************************************************/
 
 #ifndef PD_HPP__
@@ -65,12 +65,12 @@ along with this program. If not, see <http://www.gnu.org/license/>.
 
 enum PDLEVEL
 {
-    PDSEVERE = 0,
-    PDERROR,
-    PDEVENT,
-    PDWARNING,
-    PDINFO,
-    PDDEBUG
+   PDSEVERE = 0,
+   PDERROR,
+   PDEVENT,
+   PDWARNING,
+   PDINFO,
+   PDDEBUG
 } ;
 
 extern PDLEVEL _curPDLevel ;
@@ -78,7 +78,7 @@ const char *getPDLevelDesp ( PDLEVEL level ) ;
 
 #define PD_DFT_DIAGLEVEL PDWARNING
 void pdLog ( PDLEVEL level, const char *func, const char *file,
-        unsigned int line, const char *format, ... ) ;
+             unsigned int line, const char *format, ... ) ;
 void pdLog ( PDLEVEL level, const char *func, const char *file,
-        unsigned int line, std::string message ) ;
+             unsigned int line, std::string message ) ;
 #endif

@@ -1,8 +1,9 @@
 #ifndef _COMMAND_HPP_
 #define _COMMAND_HPP_
 
-#include "../include/core.hpp"
-#include "../bson/src/util/json.h"
+#include "core.hpp"
+#include "ossSocket.hpp"
+#include <bson/src/util/json.h>
 
 #define COMMAND_QUIT         "quit"
 #define COMMAND_INSERT       "insert"

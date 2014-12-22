@@ -70,11 +70,7 @@ protected :
 
 public :
     ossPrimitiveFileOp() ;
-    int Open
-            (
-                    const char * pFilePath,
-                    unsigned int options = OSS_PRIMITIVE_FILE_OP_OPEN_ALWAYS
-            ) ;
+    int Open(const char * pFilePath, unsigned int options = OSS_PRIMITIVE_FILE_OP_OPEN_ALWAYS) ;
     void openStdout() ;
     void Close() ;
     bool isValid( void ) ;

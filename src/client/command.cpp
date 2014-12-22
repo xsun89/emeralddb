@@ -1,4 +1,4 @@
-#inclucde "../include/core.hpp"
+#include "core.hpp"
 #include "command.hpp"
 #include "commandFactory.hpp"
 
@@ -126,5 +126,90 @@ int ICommand::recvReply(ossSocket &sock)
         }
     }
 
+    return ret;
+}
+
+int ICommand::sendOrder(ossSocket &sock, OnMsgBuild onMsgBuild) {
+    int ret = EDB_OK;
+    bson::BSONObj bsonData;
+    try{
+        bsonData = bson::fromjson(_jsonString);
+    }catch(std::exception &e){
+        return getError(EDB_INVALID_RECORD);
+    }
+    memset(_sendBuf, 0, SEND_BUF_SIZE);
+    int size = SEND_BUF_SIZE;
+    char *pSendBuf = _sendBuf;
+    ret = onMsgBuild(&pSendBuf, &size, bsonData);
+    if(ret){
+        return getError(EDB_MSG_BUILD_FAILED);
+    }
+    ret = sock.send(pSendBuf, *(int *)pSendBuf);
+    if(ret){
+        return getError(EDB_SOCK_SEND_FAILD);
+    }
+
+    return ret;
+}
+
+int ICommand::sendOrder(ossSocket &sock, int opCode) {
+    int ret = EDB_OK;
+    memset(_sendBuf, 0, SEND_BUF_SIZE);
+    char *pSendBuf = _sendBuf;
+    const char *pStr = "hello world";
+    *(int *)pSendBuf = strlen(pStr) + 1 + sizeof(int);
+    ret = sock.send(pSendBuf, *(int *)pSendBuf);
+    return ret;
+}
+
+/*******************************ConnectCommand*****************************/
+int ConnectCommand::execute(ossSocket &sock, std::vector<std::string> &argVec) {
+    int ret = EDB_OK;
+    _address = argVec[0];
+    _port = atoi(argVec[1].c_str());
+    sock.close();
+    sock.setAddress(_address.c_str(), _port);
+    ret = sock.initSocket();
+    if(ret){
+        return getError(EDB_SOCK_INIT_FAILED);
+    }
+    ret = sock.connect();
+    if(ret){
+        return getError(EDB_SOCK_CONNECT_FAILED);
+    }
+    sock.disableNagle();
+    return ret;
+}
+/******************************QuitCommand**********************************/
+int QuitCommand::handleReply() {
+    int ret = EDB_OK;
+    //gQuit = -1;
+    return ret;
+}
+
+int QuitCommand::execute(ossSocket &sock, std::vector<std::string> &argVec) {
+    int ret = EDB_OK;
+    if(!sock.isConnected()){
+        return getError(EDB_SOCK_NOT_CONNECT);
+    }
+    ret = sendOrder(sock, 0);
+    //sock.close();
+    ret = handleReply();
+    return ret;
+}
+
+/******************************HelpCommand**********************************/
+int HelpCommand::execute( ossSocket & sock, std::vector<std::string> & argVec )
+{
+    int ret = EDB_OK;
+    printf("List of classes of commands:\n\n");
+    printf("%s [server] [port]-- connecting emeralddb server\n", COMMAND_CONNECT);
+    printf("%s -- sending a insert command to emeralddb server\n", COMMAND_INSERT);
+    printf("%s -- sending a query command to emeralddb server\n", COMMAND_QUERY);
+    printf("%s -- sending a delete command to emeralddb server\n", COMMAND_DELETE);
+    printf("%s [number]-- sending a test command to emeralddb server\n", COMMAND_TEST);
+    printf("%s -- providing current number of record inserting\n", COMMAND_SNAPSHOT);
+    printf("%s -- quitting command\n\n", COMMAND_QUIT);
+    printf("Type \"help\" command for help\n");
     return ret;
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#include "../include/core.hpp"
+#include "core.hpp"
 #include "edb.hpp"
 #include "command.hpp"
 
@@ -33,12 +33,12 @@ void Edb::prompt(void)
 
     std::string textInput = _cmdBuffer;
     std::vector<std::string> textVec;
-    splict(textInput, SPACE, textVec);
+    split(textInput, SPACE, textVec);
     int count = 0;
     std::string cmd = "";
-    srd::vector<std::string> optionVec;
+    std::vector<std::string> optionVec;
     std::vector<std::string>::iterator iter = textVec.begin();
-    ICommand *cmd = NULL;
+    ICommand *pCmd = NULL;
     for(; iter != textVec.end(); ++iter)
     {
         std::string str = *iter;
@@ -46,11 +46,11 @@ void Edb::prompt(void)
             cmd = str;
             count++;
         }else{
-            optionVec.pop_back(str);
+            optionVec.push_back(str);
         }
     }
 
-    pCmd = cmdFactory.getCommandProcesser(cmd.c_str() );
+    pCmd = _cmdFactory.getCommandProcesser(cmd.c_str() );
     if(NULL != pCmd){
         pCmd->execute(_sock, optionVec);
     }
@@ -74,7 +74,7 @@ int Edb::readInput(const char *pPrompt, int numIndent)
         readLine(&_cmdBuffer[curBufLen-1], CMD_BUFFER_SIZE - curBufLen);
     }
 
-    curBufLen = strlen(_curBuffer);
+    curBufLen = strlen(_cmdBuffer);
     for(int i = 0; i<curBufLen; i++ ){
         if(_cmdBuffer[i] == TAB){
             _cmdBuffer[i] = SPACE;
