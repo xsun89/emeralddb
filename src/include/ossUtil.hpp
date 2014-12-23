@@ -13,24 +13,38 @@
    You should have received a copy of the GNU Affero General Public License
    along with this program. If not, see <http://www.gnu.org/license/>.
 *******************************************************************************/
-#include "commandFactory.hpp"
+#ifndef OSSUTIL_HPP__
+#define OSSUTIL_HPP__
 
-CommandFactory::CommandFactory()
+inline void ossSleepmicros ( unsigned int s )
 {
-   addCommand();
+   struct timespec t ;
+   t.tv_sec = (time_t) (s/1000000) ;
+   t.tv_nsec = 1000 * (s % 1000000 ) ;
+   while ( nanosleep ( &t, &t )==-1 && errno==EINTR ) ;
 }
 
-ICommand * CommandFactory::getCommandProcesser(const char * pCmd)
+inline void ossSleepmillis ( unsigned int s )
 {
-   ICommand * pProcessor = NULL;
-   do {
-      COMMAND_MAP::iterator iter;
-      iter = _cmdMap.find(pCmd);
-      if( iter != _cmdMap.end() )
-      {
-         pProcessor = iter->second;
-      }
-   }while(0);
-   return pProcessor;
+   ossSleepmicros ( s * 1000 ) ;
 }
 
+typedef pid_t     OSSPID ;
+typedef pthread_t OSSTID ;
+
+inline OSSPID ossGetParentProcessID ()
+{
+   return getppid () ;
+}
+
+inline OSSPID ossGetCurrentProcessID ()
+{
+   return getpid () ;
+}
+
+inline OSSTID ossGetCurrentThreadID ()
+{
+   return syscall(SYS_gettid) ;
+}
+
+#endif

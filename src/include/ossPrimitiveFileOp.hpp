@@ -1,17 +1,17 @@
 /*******************************************************************************
-Copyright (C) 2013 SequoiaDB Software Inc.
+   Copyright (C) 2013 SequoiaDB Software Inc.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License, version 3,
-as published by the Free Software Foundation.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License, version 3,
+   as published by the Free Software Foundation.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/license/>.
+   You should have received a copy of the GNU Affero General Public License
+   along with this program. If not, see <http://www.gnu.org/license/>.
 *******************************************************************************/
 
 #ifndef OSSPRIMITIVEFILEOP_HPP__
@@ -58,40 +58,44 @@ typedef oss_off_t offsetType ;
 class ossPrimitiveFileOp
 {
 public :
-    typedef  int    handleType ;
+   typedef  int    handleType ;
 private :
-    handleType _fileHandle ;
-    ossPrimitiveFileOp( const ossPrimitiveFileOp & ) {}
-    const ossPrimitiveFileOp &operator=( const ossPrimitiveFileOp & ) ;
-    bool _bIsStdout ;
+   handleType _fileHandle ;
+   ossPrimitiveFileOp( const ossPrimitiveFileOp & ) {}
+   const ossPrimitiveFileOp &operator=( const ossPrimitiveFileOp & ) ;
+   bool _bIsStdout ;
 
 protected :
-    void setFileHandle( handleType handle ) ;
+   void setFileHandle( handleType handle ) ;
 
 public :
-    ossPrimitiveFileOp() ;
-    int Open(const char * pFilePath, unsigned int options = OSS_PRIMITIVE_FILE_OP_OPEN_ALWAYS) ;
-    void openStdout() ;
-    void Close() ;
-    bool isValid( void ) ;
-    int Read( const size_t size, void * const pBuf, int * const pBytesRead ) ;
+   ossPrimitiveFileOp() ;
+   int Open
+   (
+      const char * pFilePath,
+      unsigned int options = OSS_PRIMITIVE_FILE_OP_OPEN_ALWAYS
+   ) ;
+   void openStdout() ;
+   void Close() ;
+   bool isValid( void ) ;
+   int Read( const size_t size, void * const pBuf, int * const pBytesRead ) ;
 
-    int Write( const void * pBuf, size_t len = 0 ) ;
+   int Write( const void * pBuf, size_t len = 0 ) ;
 
-    int fWrite( const char * fmt, ... ) ;
+   int fWrite( const char * fmt, ... ) ;
 
-    offsetType getCurrentOffset (void) const ;
+   offsetType getCurrentOffset (void) const ;
 
-    void seekToOffset( offsetType offset ) ;
+   void seekToOffset( offsetType offset ) ;
 
-    void seekToEnd( void ) ;
+   void seekToEnd( void ) ;
 
-    int getSize( offsetType * const pFileSize ) ;
+   int getSize( offsetType * const pFileSize ) ;
 
-    handleType getHandle( void ) const
-    {
-        return _fileHandle ;
-    }
+   handleType getHandle( void ) const
+   {
+      return _fileHandle ;
+   }
 } ;
 
 

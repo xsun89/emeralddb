@@ -1,35 +1,81 @@
-pmd/emeralddb-pmdMain.o: pmd/pmdMain.cpp /usr/include/stdc-predef.h \
- include/core.hpp /usr/include/unistd.h /usr/include/features.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+pmd/emeralddb-pmdAgent.o: pmd/pmdAgent.cpp /usr/include/stdc-predef.h \
+ include/pd.hpp /usr/include/c++/4.8/string \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++config.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/os_defines.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/cpu_defines.h \
+ /usr/include/c++/4.8/bits/stringfwd.h \
+ /usr/include/c++/4.8/bits/memoryfwd.h \
+ /usr/include/c++/4.8/bits/char_traits.h \
+ /usr/include/c++/4.8/bits/stl_algobase.h \
+ /usr/include/c++/4.8/bits/functexcept.h \
+ /usr/include/c++/4.8/bits/exception_defines.h \
+ /usr/include/c++/4.8/bits/cpp_type_traits.h \
+ /usr/include/c++/4.8/ext/type_traits.h \
+ /usr/include/c++/4.8/ext/numeric_traits.h \
+ /usr/include/c++/4.8/bits/stl_pair.h /usr/include/c++/4.8/bits/move.h \
+ /usr/include/c++/4.8/bits/concept_check.h \
+ /usr/include/c++/4.8/bits/stl_iterator_base_types.h \
+ /usr/include/c++/4.8/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/4.8/debug/debug.h \
+ /usr/include/c++/4.8/bits/stl_iterator.h \
+ /usr/include/c++/4.8/bits/postypes.h /usr/include/c++/4.8/cwchar \
+ /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/c++/4.8/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++allocator.h \
+ /usr/include/c++/4.8/ext/new_allocator.h /usr/include/c++/4.8/new \
+ /usr/include/c++/4.8/exception \
+ /usr/include/c++/4.8/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/4.8/bits/localefwd.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++locale.h \
+ /usr/include/c++/4.8/clocale /usr/include/locale.h \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/4.8/iosfwd \
+ /usr/include/c++/4.8/cctype /usr/include/ctype.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
+ /usr/include/c++/4.8/bits/ostream_insert.h \
+ /usr/include/c++/4.8/bits/cxxabi_forced.h \
+ /usr/include/c++/4.8/bits/stl_function.h \
+ /usr/include/c++/4.8/backward/binders.h \
+ /usr/include/c++/4.8/bits/range_access.h \
+ /usr/include/c++/4.8/bits/basic_string.h \
+ /usr/include/c++/4.8/ext/atomicity.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+ /usr/include/x86_64-linux-gnu/c++/4.8/bits/atomic_word.h \
+ /usr/include/c++/4.8/bits/basic_string.tcc include/pmdEDUMgr.hpp \
+ include/core.hpp /usr/include/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
- /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
- /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h \
+ /usr/include/libio.h /usr/include/_G_config.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/xlocale.h \
- /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/string.h \
  /usr/include/linux/limits.h /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/include/x86_64-linux-gnu/bits/timex.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/syscall.h /usr/include/x86_64-linux-gnu/sys/syscall.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h /usr/include/fcntl.h \
@@ -58,57 +104,12 @@ pmd/emeralddb-pmdMain.o: pmd/pmdMain.cpp /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/asm/sockios.h \
  /usr/include/asm-generic/sockios.h /usr/include/netinet/in.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/in.h /usr/include/arpa/inet.h \
  /usr/include/netdb.h /usr/include/rpc/netdb.h \
  /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/netinet/tcp.h \
  /usr/include/x86_64-linux-gnu/sys/mman.h \
  /usr/include/x86_64-linux-gnu/bits/mman.h \
- /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
- /usr/include/c++/4.8/string \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++config.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/os_defines.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/cpu_defines.h \
- /usr/include/c++/4.8/bits/stringfwd.h \
- /usr/include/c++/4.8/bits/memoryfwd.h \
- /usr/include/c++/4.8/bits/char_traits.h \
- /usr/include/c++/4.8/bits/stl_algobase.h \
- /usr/include/c++/4.8/bits/functexcept.h \
- /usr/include/c++/4.8/bits/exception_defines.h \
- /usr/include/c++/4.8/bits/cpp_type_traits.h \
- /usr/include/c++/4.8/ext/type_traits.h \
- /usr/include/c++/4.8/ext/numeric_traits.h \
- /usr/include/c++/4.8/bits/stl_pair.h /usr/include/c++/4.8/bits/move.h \
- /usr/include/c++/4.8/bits/concept_check.h \
- /usr/include/c++/4.8/bits/stl_iterator_base_types.h \
- /usr/include/c++/4.8/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/4.8/debug/debug.h \
- /usr/include/c++/4.8/bits/stl_iterator.h \
- /usr/include/c++/4.8/bits/postypes.h /usr/include/c++/4.8/cwchar \
- /usr/include/c++/4.8/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++allocator.h \
- /usr/include/c++/4.8/ext/new_allocator.h /usr/include/c++/4.8/new \
- /usr/include/c++/4.8/exception \
- /usr/include/c++/4.8/bits/atomic_lockfree_defines.h \
- /usr/include/c++/4.8/bits/localefwd.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/c++locale.h \
- /usr/include/c++/4.8/clocale /usr/include/locale.h \
- /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/4.8/iosfwd \
- /usr/include/c++/4.8/cctype /usr/include/ctype.h \
- /usr/include/c++/4.8/bits/ostream_insert.h \
- /usr/include/c++/4.8/bits/cxxabi_forced.h \
- /usr/include/c++/4.8/bits/stl_function.h \
- /usr/include/c++/4.8/backward/binders.h \
- /usr/include/c++/4.8/bits/range_access.h \
- /usr/include/c++/4.8/bits/basic_string.h \
- /usr/include/c++/4.8/ext/atomicity.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/c++/4.8/bits/atomic_word.h \
- /usr/include/c++/4.8/bits/basic_string.tcc /usr/include/c++/4.8/map \
+ /usr/include/x86_64-linux-gnu/bits/mman-linux.h /usr/include/c++/4.8/map \
  /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_map.h \
  /usr/include/c++/4.8/bits/stl_multimap.h /usr/include/c++/4.8/set \
  /usr/include/c++/4.8/bits/stl_set.h \
@@ -133,9 +134,8 @@ pmd/emeralddb-pmdMain.o: pmd/pmdMain.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/locale_facets.tcc \
  /usr/include/c++/4.8/bits/basic_ios.tcc \
  /usr/include/c++/4.8/bits/ostream.tcc /usr/include/c++/4.8/istream \
- /usr/include/c++/4.8/bits/istream.tcc include/pmd.hpp include/core.hpp \
- include/pmdEDUMgr.hpp include/pmdEDU.hpp include/pmdEDUEvent.hpp \
- include/ossQueue.hpp /usr/include/c++/4.8/queue \
+ /usr/include/c++/4.8/bits/istream.tcc include/pmdEDU.hpp \
+ include/pmdEDUEvent.hpp include/ossQueue.hpp /usr/include/c++/4.8/queue \
  /usr/include/c++/4.8/deque /usr/include/c++/4.8/bits/stl_deque.h \
  /usr/include/c++/4.8/bits/deque.tcc /usr/include/c++/4.8/bits/stl_heap.h \
  /usr/include/c++/4.8/bits/stl_queue.h /usr/include/boost/thread.hpp \
@@ -734,14 +734,46 @@ pmd/emeralddb-pmdMain.o: pmd/pmdMain.cpp /usr/include/stdc-predef.h \
  /usr/include/boost/thread/future_error_code.hpp \
  /usr/include/boost/detail/atomic_undef_macros.hpp \
  /usr/include/boost/detail/atomic_redef_macros.hpp include/ossSocket.hpp \
- include/ossLatch.hpp include/ossUtil.hpp include/pmdOptions.hpp \
- /usr/include/boost/program_options.hpp \
- /usr/include/boost/program_options/options_description.hpp \
- /usr/include/boost/program_options/config.hpp \
- /usr/include/boost/program_options/errors.hpp \
- /usr/include/boost/program_options/value_semantic.hpp \
- /usr/include/boost/any.hpp /usr/include/boost/function/function1.hpp \
- /usr/include/boost/lexical_cast.hpp /usr/include/c++/4.8/cstdio \
+ include/ossLatch.hpp include/ossUtil.hpp include/pmdEDU.hpp \
+ include/ossSocket.hpp pmd/../bson/src/bson.h \
+ pmd/../bson/src/bsonassert.h /usr/include/boost/utility.hpp \
+ /usr/include/boost/utility/base_from_member.hpp \
+ /usr/include/boost/utility/binary.hpp \
+ /usr/include/boost/preprocessor/control/deduce_d.hpp \
+ /usr/include/boost/preprocessor/seq/cat.hpp \
+ /usr/include/boost/preprocessor/seq/fold_left.hpp \
+ /usr/include/boost/preprocessor/seq/transform.hpp \
+ /usr/include/boost/preprocessor/arithmetic/mod.hpp \
+ /usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+ /usr/include/boost/preprocessor/comparison/less_equal.hpp \
+ /usr/include/boost/preprocessor/logical/not.hpp \
+ /usr/include/boost/utility/identity_type.hpp \
+ pmd/../bson/src/stringdata.h pmd/../bson/src/bsontypes.h \
+ pmd/../bson/src/util/misc.h pmd/../bson/src/oid.h \
+ pmd/../bson/src/util/hex.h pmd/../bson/src/util/builder.h \
+ pmd/../bson/src/util/../inline_decls.h pmd/../bson/src/bsonelement.h \
+ pmd/../bson/src/util/optime.h pmd/../bson/src/bsonobj.h \
+ /usr/include/boost/intrusive_ptr.hpp \
+ /usr/include/boost/smart_ptr/intrusive_ptr.hpp \
+ pmd/../bson/src/lib/atomic_int.h pmd/../bson/src/bsonmisc.h \
+ pmd/../bson/src/bsonobjbuilder.h pmd/../bson/src/bsonobjiterator.h \
+ pmd/../bson/src/bson-inl.h pmd/../bson/src/bson_db.h \
+ pmd/../bson/src/util/time_support.h /usr/include/c++/4.8/cstdio \
+ /usr/include/boost/date_time/posix_time/posix_time.hpp \
+ /usr/include/boost/date_time/posix_time/time_formatters.hpp \
+ /usr/include/boost/date_time/gregorian/gregorian.hpp \
+ /usr/include/boost/date_time/gregorian/formatters.hpp \
+ /usr/include/boost/date_time/date_formatting.hpp \
+ /usr/include/boost/date_time/iso_format.hpp \
+ /usr/include/boost/date_time/parse_format_base.hpp \
+ /usr/include/boost/date_time/date_format_simple.hpp \
+ /usr/include/boost/date_time/gregorian/gregorian_io.hpp \
+ /usr/include/boost/date_time/date_facet.hpp \
+ /usr/include/boost/date_time/special_values_formatter.hpp \
+ /usr/include/boost/date_time/period_formatter.hpp \
+ /usr/include/boost/date_time/period_parser.hpp \
+ /usr/include/boost/date_time/string_parse_tree.hpp \
+ /usr/include/boost/lexical_cast.hpp \
  /usr/include/boost/detail/lcast_precision.hpp \
  /usr/include/boost/array.hpp /usr/include/boost/swap.hpp \
  /usr/include/boost/functional/hash_fwd.hpp \
@@ -924,23 +956,39 @@ pmd/emeralddb-pmdMain.o: pmd/pmdMain.cpp /usr/include/stdc-predef.h \
  /usr/include/boost/math/special_functions/fpclassify.hpp \
  /usr/include/boost/math/tools/real_cast.hpp \
  /usr/include/boost/container/container_fwd.hpp \
- /usr/include/boost/program_options/detail/value_semantic.hpp \
- /usr/include/boost/program_options/positional_options.hpp \
- /usr/include/boost/program_options/parsers.hpp \
- /usr/include/boost/program_options/option.hpp \
- /usr/include/boost/program_options/detail/cmdline.hpp \
- /usr/include/boost/program_options/cmdline.hpp \
- /usr/include/boost/program_options/detail/parsers.hpp \
- /usr/include/boost/program_options/detail/convert.hpp \
- /usr/include/boost/program_options/variables_map.hpp \
- /usr/include/boost/program_options/version.hpp include/pd.hpp \
+ /usr/include/boost/algorithm/string/case_conv.hpp \
+ /usr/include/boost/iterator/transform_iterator.hpp \
+ /usr/include/boost/algorithm/string/detail/case_conv.hpp \
+ /usr/include/boost/date_time/string_convert.hpp \
+ /usr/include/boost/date_time/date_generator_formatter.hpp \
+ /usr/include/boost/date_time/date_generator_parser.hpp \
+ /usr/include/boost/date_time/format_date_parser.hpp \
+ /usr/include/boost/date_time/strings_from_facet.hpp \
+ /usr/include/boost/date_time/special_values_parser.hpp \
+ /usr/include/boost/date_time/gregorian/parsers.hpp \
+ /usr/include/boost/date_time/date_parsing.hpp \
+ /usr/include/boost/tokenizer.hpp /usr/include/boost/token_iterator.hpp \
+ /usr/include/boost/iterator/detail/minimum_category.hpp \
+ /usr/include/boost/token_functions.hpp \
+ /usr/include/boost/date_time/time_formatting_streams.hpp \
+ /usr/include/boost/date_time/date_formatting_locales.hpp \
+ /usr/include/boost/date_time/date_names_put.hpp \
+ /usr/include/boost/date_time/time_parsing.hpp \
+ /usr/include/boost/date_time/posix_time/posix_time_io.hpp \
+ /usr/include/boost/date_time/time_facet.hpp \
+ /usr/include/boost/algorithm/string/erase.hpp \
+ /usr/include/boost/date_time/posix_time/time_parsers.hpp include/pmd.hpp \
  include/pmdEDUMgr.hpp
 
 /usr/include/stdc-predef.h:
 
-include/core.hpp:
+include/pd.hpp:
 
-/usr/include/unistd.h:
+/usr/include/c++/4.8/string:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++config.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/os_defines.h:
 
 /usr/include/features.h:
 
@@ -952,29 +1000,151 @@ include/core.hpp:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/cpu_defines.h:
 
-/usr/include/x86_64-linux-gnu/bits/environments.h:
+/usr/include/c++/4.8/bits/stringfwd.h:
+
+/usr/include/c++/4.8/bits/memoryfwd.h:
+
+/usr/include/c++/4.8/bits/char_traits.h:
+
+/usr/include/c++/4.8/bits/stl_algobase.h:
+
+/usr/include/c++/4.8/bits/functexcept.h:
+
+/usr/include/c++/4.8/bits/exception_defines.h:
+
+/usr/include/c++/4.8/bits/cpp_type_traits.h:
+
+/usr/include/c++/4.8/ext/type_traits.h:
+
+/usr/include/c++/4.8/ext/numeric_traits.h:
+
+/usr/include/c++/4.8/bits/stl_pair.h:
+
+/usr/include/c++/4.8/bits/move.h:
+
+/usr/include/c++/4.8/bits/concept_check.h:
+
+/usr/include/c++/4.8/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/4.8/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/4.8/debug/debug.h:
+
+/usr/include/c++/4.8/bits/stl_iterator.h:
+
+/usr/include/c++/4.8/bits/postypes.h:
+
+/usr/include/c++/4.8/cwchar:
+
+/usr/include/wchar.h:
+
+/usr/include/stdio.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/c++/4.8/bits/allocator.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++allocator.h:
+
+/usr/include/c++/4.8/ext/new_allocator.h:
+
+/usr/include/c++/4.8/new:
+
+/usr/include/c++/4.8/exception:
+
+/usr/include/c++/4.8/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/4.8/bits/localefwd.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++locale.h:
+
+/usr/include/c++/4.8/clocale:
+
+/usr/include/locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/c++/4.8/iosfwd:
+
+/usr/include/c++/4.8/cctype:
+
+/usr/include/ctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
+/usr/include/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
+/usr/include/c++/4.8/bits/ostream_insert.h:
+
+/usr/include/c++/4.8/bits/cxxabi_forced.h:
+
+/usr/include/c++/4.8/bits/stl_function.h:
+
+/usr/include/c++/4.8/backward/binders.h:
+
+/usr/include/c++/4.8/bits/range_access.h:
+
+/usr/include/c++/4.8/bits/basic_string.h:
+
+/usr/include/c++/4.8/ext/atomicity.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr-default.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/sched.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/c++/4.8/bits/atomic_word.h:
+
+/usr/include/c++/4.8/bits/basic_string.tcc:
+
+include/pmdEDUMgr.hpp:
+
+include/core.hpp:
+
+/usr/include/unistd.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/getopt.h:
 
-/usr/include/stdio.h:
-
 /usr/include/libio.h:
 
 /usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -986,19 +1156,7 @@ include/core.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
-/usr/include/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
-
-/usr/include/xlocale.h:
-
 /usr/include/x86_64-linux-gnu/sys/types.h:
-
-/usr/include/time.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
@@ -1006,11 +1164,7 @@ include/core.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/sigset.h:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
 /usr/include/x86_64-linux-gnu/sys/sysmacros.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/alloca.h:
 
@@ -1021,8 +1175,6 @@ include/core.hpp:
 /usr/include/linux/limits.h:
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/syscall.h:
 
@@ -1098,8 +1250,6 @@ include/core.hpp:
 
 /usr/include/stdint.h:
 
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
 /usr/include/x86_64-linux-gnu/bits/in.h:
 
 /usr/include/arpa/inet.h:
@@ -1117,108 +1267,6 @@ include/core.hpp:
 /usr/include/x86_64-linux-gnu/bits/mman.h:
 
 /usr/include/x86_64-linux-gnu/bits/mman-linux.h:
-
-/usr/include/c++/4.8/string:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++config.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/os_defines.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/cpu_defines.h:
-
-/usr/include/c++/4.8/bits/stringfwd.h:
-
-/usr/include/c++/4.8/bits/memoryfwd.h:
-
-/usr/include/c++/4.8/bits/char_traits.h:
-
-/usr/include/c++/4.8/bits/stl_algobase.h:
-
-/usr/include/c++/4.8/bits/functexcept.h:
-
-/usr/include/c++/4.8/bits/exception_defines.h:
-
-/usr/include/c++/4.8/bits/cpp_type_traits.h:
-
-/usr/include/c++/4.8/ext/type_traits.h:
-
-/usr/include/c++/4.8/ext/numeric_traits.h:
-
-/usr/include/c++/4.8/bits/stl_pair.h:
-
-/usr/include/c++/4.8/bits/move.h:
-
-/usr/include/c++/4.8/bits/concept_check.h:
-
-/usr/include/c++/4.8/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/4.8/bits/stl_iterator_base_funcs.h:
-
-/usr/include/c++/4.8/debug/debug.h:
-
-/usr/include/c++/4.8/bits/stl_iterator.h:
-
-/usr/include/c++/4.8/bits/postypes.h:
-
-/usr/include/c++/4.8/cwchar:
-
-/usr/include/c++/4.8/bits/allocator.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++allocator.h:
-
-/usr/include/c++/4.8/ext/new_allocator.h:
-
-/usr/include/c++/4.8/new:
-
-/usr/include/c++/4.8/exception:
-
-/usr/include/c++/4.8/bits/atomic_lockfree_defines.h:
-
-/usr/include/c++/4.8/bits/localefwd.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/c++locale.h:
-
-/usr/include/c++/4.8/clocale:
-
-/usr/include/locale.h:
-
-/usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/usr/include/c++/4.8/iosfwd:
-
-/usr/include/c++/4.8/cctype:
-
-/usr/include/ctype.h:
-
-/usr/include/c++/4.8/bits/ostream_insert.h:
-
-/usr/include/c++/4.8/bits/cxxabi_forced.h:
-
-/usr/include/c++/4.8/bits/stl_function.h:
-
-/usr/include/c++/4.8/backward/binders.h:
-
-/usr/include/c++/4.8/bits/range_access.h:
-
-/usr/include/c++/4.8/bits/basic_string.h:
-
-/usr/include/c++/4.8/ext/atomicity.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/gthr-default.h:
-
-/usr/include/pthread.h:
-
-/usr/include/sched.h:
-
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
-/usr/include/x86_64-linux-gnu/c++/4.8/bits/atomic_word.h:
-
-/usr/include/c++/4.8/bits/basic_string.tcc:
 
 /usr/include/c++/4.8/map:
 
@@ -1287,12 +1335,6 @@ include/core.hpp:
 /usr/include/c++/4.8/istream:
 
 /usr/include/c++/4.8/bits/istream.tcc:
-
-include/pmd.hpp:
-
-include/core.hpp:
-
-include/pmdEDUMgr.hpp:
 
 include/pmdEDU.hpp:
 
@@ -2606,25 +2648,107 @@ include/ossLatch.hpp:
 
 include/ossUtil.hpp:
 
-include/pmdOptions.hpp:
+include/pmdEDU.hpp:
 
-/usr/include/boost/program_options.hpp:
+include/ossSocket.hpp:
 
-/usr/include/boost/program_options/options_description.hpp:
+pmd/../bson/src/bson.h:
 
-/usr/include/boost/program_options/config.hpp:
+pmd/../bson/src/bsonassert.h:
 
-/usr/include/boost/program_options/errors.hpp:
+/usr/include/boost/utility.hpp:
 
-/usr/include/boost/program_options/value_semantic.hpp:
+/usr/include/boost/utility/base_from_member.hpp:
 
-/usr/include/boost/any.hpp:
+/usr/include/boost/utility/binary.hpp:
 
-/usr/include/boost/function/function1.hpp:
+/usr/include/boost/preprocessor/control/deduce_d.hpp:
 
-/usr/include/boost/lexical_cast.hpp:
+/usr/include/boost/preprocessor/seq/cat.hpp:
+
+/usr/include/boost/preprocessor/seq/fold_left.hpp:
+
+/usr/include/boost/preprocessor/seq/transform.hpp:
+
+/usr/include/boost/preprocessor/arithmetic/mod.hpp:
+
+/usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp:
+
+/usr/include/boost/preprocessor/comparison/less_equal.hpp:
+
+/usr/include/boost/preprocessor/logical/not.hpp:
+
+/usr/include/boost/utility/identity_type.hpp:
+
+pmd/../bson/src/stringdata.h:
+
+pmd/../bson/src/bsontypes.h:
+
+pmd/../bson/src/util/misc.h:
+
+pmd/../bson/src/oid.h:
+
+pmd/../bson/src/util/hex.h:
+
+pmd/../bson/src/util/builder.h:
+
+pmd/../bson/src/util/../inline_decls.h:
+
+pmd/../bson/src/bsonelement.h:
+
+pmd/../bson/src/util/optime.h:
+
+pmd/../bson/src/bsonobj.h:
+
+/usr/include/boost/intrusive_ptr.hpp:
+
+/usr/include/boost/smart_ptr/intrusive_ptr.hpp:
+
+pmd/../bson/src/lib/atomic_int.h:
+
+pmd/../bson/src/bsonmisc.h:
+
+pmd/../bson/src/bsonobjbuilder.h:
+
+pmd/../bson/src/bsonobjiterator.h:
+
+pmd/../bson/src/bson-inl.h:
+
+pmd/../bson/src/bson_db.h:
+
+pmd/../bson/src/util/time_support.h:
 
 /usr/include/c++/4.8/cstdio:
+
+/usr/include/boost/date_time/posix_time/posix_time.hpp:
+
+/usr/include/boost/date_time/posix_time/time_formatters.hpp:
+
+/usr/include/boost/date_time/gregorian/gregorian.hpp:
+
+/usr/include/boost/date_time/gregorian/formatters.hpp:
+
+/usr/include/boost/date_time/date_formatting.hpp:
+
+/usr/include/boost/date_time/iso_format.hpp:
+
+/usr/include/boost/date_time/parse_format_base.hpp:
+
+/usr/include/boost/date_time/date_format_simple.hpp:
+
+/usr/include/boost/date_time/gregorian/gregorian_io.hpp:
+
+/usr/include/boost/date_time/date_facet.hpp:
+
+/usr/include/boost/date_time/special_values_formatter.hpp:
+
+/usr/include/boost/date_time/period_formatter.hpp:
+
+/usr/include/boost/date_time/period_parser.hpp:
+
+/usr/include/boost/date_time/string_parse_tree.hpp:
+
+/usr/include/boost/lexical_cast.hpp:
 
 /usr/include/boost/detail/lcast_precision.hpp:
 
@@ -3022,26 +3146,52 @@ include/pmdOptions.hpp:
 
 /usr/include/boost/container/container_fwd.hpp:
 
-/usr/include/boost/program_options/detail/value_semantic.hpp:
+/usr/include/boost/algorithm/string/case_conv.hpp:
 
-/usr/include/boost/program_options/positional_options.hpp:
+/usr/include/boost/iterator/transform_iterator.hpp:
 
-/usr/include/boost/program_options/parsers.hpp:
+/usr/include/boost/algorithm/string/detail/case_conv.hpp:
 
-/usr/include/boost/program_options/option.hpp:
+/usr/include/boost/date_time/string_convert.hpp:
 
-/usr/include/boost/program_options/detail/cmdline.hpp:
+/usr/include/boost/date_time/date_generator_formatter.hpp:
 
-/usr/include/boost/program_options/cmdline.hpp:
+/usr/include/boost/date_time/date_generator_parser.hpp:
 
-/usr/include/boost/program_options/detail/parsers.hpp:
+/usr/include/boost/date_time/format_date_parser.hpp:
 
-/usr/include/boost/program_options/detail/convert.hpp:
+/usr/include/boost/date_time/strings_from_facet.hpp:
 
-/usr/include/boost/program_options/variables_map.hpp:
+/usr/include/boost/date_time/special_values_parser.hpp:
 
-/usr/include/boost/program_options/version.hpp:
+/usr/include/boost/date_time/gregorian/parsers.hpp:
 
-include/pd.hpp:
+/usr/include/boost/date_time/date_parsing.hpp:
+
+/usr/include/boost/tokenizer.hpp:
+
+/usr/include/boost/token_iterator.hpp:
+
+/usr/include/boost/iterator/detail/minimum_category.hpp:
+
+/usr/include/boost/token_functions.hpp:
+
+/usr/include/boost/date_time/time_formatting_streams.hpp:
+
+/usr/include/boost/date_time/date_formatting_locales.hpp:
+
+/usr/include/boost/date_time/date_names_put.hpp:
+
+/usr/include/boost/date_time/time_parsing.hpp:
+
+/usr/include/boost/date_time/posix_time/posix_time_io.hpp:
+
+/usr/include/boost/date_time/time_facet.hpp:
+
+/usr/include/boost/algorithm/string/erase.hpp:
+
+/usr/include/boost/date_time/posix_time/time_parsers.hpp:
+
+include/pmd.hpp:
 
 include/pmdEDUMgr.hpp:

@@ -13,24 +13,21 @@
    You should have received a copy of the GNU Affero General Public License
    along with this program. If not, see <http://www.gnu.org/license/>.
 *******************************************************************************/
-#include "commandFactory.hpp"
+#include "pmd.hpp"
+#include "pmdOptions.hpp"
+#include "pd.hpp"
 
-CommandFactory::CommandFactory()
+EDB_KRCB pmd_krcb ;
+extern char _pdDiagLogPath [ OSS_MAX_PATHSIZE+1 ] ;
+int EDB_KRCB::init ( pmdOptions *options )
 {
-   addCommand();
-}
-
-ICommand * CommandFactory::getCommandProcesser(const char * pCmd)
-{
-   ICommand * pProcessor = NULL;
-   do {
-      COMMAND_MAP::iterator iter;
-      iter = _cmdMap.find(pCmd);
-      if( iter != _cmdMap.end() )
-      {
-         pProcessor = iter->second;
-      }
-   }while(0);
-   return pProcessor;
+   setDBStatus ( EDB_DB_NORMAL ) ;
+   setDataFilePath ( options->getDBPath () ) ;
+   setLogFilePath ( options->getLogPath () ) ;
+   strncpy ( _pdDiagLogPath, getLogFilePath(), sizeof(_pdDiagLogPath) ) ;
+   setSvcName ( options->getServiceName () ) ;
+   setMaxPool ( options->getMaxPool () ) ;
+   //return _rtnMgr.rtnInitialize() ;
+   return EDB_OK ;
 }
 

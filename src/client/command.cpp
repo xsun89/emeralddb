@@ -1,17 +1,35 @@
+/*******************************************************************************
+ Copyright (C) 2013 SequoiaDB Software Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License, version 3,
+   as published by the Free Software Foundation.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program. If not, see <http://www.gnu.org/license/>.
+*******************************************************************************/
 #include "core.hpp"
 #include "command.hpp"
 #include "commandFactory.hpp"
+#include "pd.hpp"
 
 COMMAND_BEGIN
-COMMAND_ADD(COMMAND_CONNECT, ConnectCommand)
+COMMAND_ADD(COMMAND_INSERT,InsertCommand)
+COMMAND_ADD(COMMAND_CONNECT,ConnectCommand)
 COMMAND_ADD(COMMAND_QUIT, QuitCommand)
 COMMAND_ADD(COMMAND_HELP, HelpCommand)
 COMMAND_END
 
 extern int gQuit;
-int ICommand::execute(ossSocket &sock, std::vector<std::string> &argVec)
+
+int ICommand::execute(  ossSocket & sock, std::vector<std::string> & argVec )
 {
-    return EDB_OK;
+   return EDB_OK;
 }
 
 int ICommand::getError(int code)
@@ -89,127 +107,194 @@ int ICommand::getError(int code)
    return code;
 }
 
-int ICommand::recvReply(ossSocket &sock)
+
+int ICommand::recvReply( ossSocket & sock )
 {
-    int length = 0;
-    int ret = EDB_OK;
-    memset(_recvBuf, 0, RECV_BUF_SIZE);
-    if(!sock.isConnected())
-    {
-        return getError(EDB_SOCK_NOT_CONNECT);
-    }
-    while(1)
-    {
-        ret = sock.recv(_recvBuf, sizeof(int));
-        if(EDB_TIMEOUT == ret){
-            continue;
-        }else if(EDB_NETWORK_CLOSE == ret){
-            return getError(EDB_SOCK_REMOTE_CLOSED);
-        }else{
-            break;
-        }
-    }
-    length = *((int *)_recvBuf);
-    if(length > RECV_BUF_SIZE ){
-        return getError(EDB_RECV_DATA_LENGTH_ERROR );
-    }
+   // define message data length.
+   int length = 0;
+   int ret = EDB_OK;
+   // fill receive buffer with 0.
+   memset(_recvBuf, 0, RECV_BUF_SIZE);
+   if( !sock.isConnected() )
+   {
+      return getError(EDB_SOCK_NOT_CONNECT);
+   }
+   while(1)
+   {
+      // receive data from the server.first receive the length of the data.
+      ret = sock.recv(_recvBuf, sizeof(int));
+      if( EDB_TIMEOUT == ret )
+      {
+         continue;
+      }
+      else if( EDB_NETWORK_CLOSE == ret )
+      {
+         return getError(EDB_SOCK_REMOTE_CLOSED);
+      }
+      else
+      {
+         break;
+      }
+   }
+   // get the value of length.
+   length = *(int*)_recvBuf;
+   // judge the length is valid or not.
+   if(length > RECV_BUF_SIZE)
+   {
+      return getError(EDB_RECV_DATA_LENGTH_ERROR);
+   }
 
-    while(1)
-    {
-        ret = sock.recv(&_recvBuf[sizeof(int)], length-sizeof(int));
-        if(ret == EDB_TIMEOUT ){
-            continue;
-        }else if(EDB_NETWORK_CLOSE == ret ){
-            return getError(EDB_SOCK_REMOTE_CLOSED);
-        }else{
-            break;
-        }
-    }
-
-    return ret;
+   // receive data from the server.second receive the last data.
+   while(1)
+   {
+      ret = sock.recv(&_recvBuf[sizeof(int)],length-sizeof(int));
+      if(ret == EDB_TIMEOUT)
+      {
+         continue;
+      }
+      else if(EDB_NETWORK_CLOSE == ret)
+      {
+         return getError(EDB_SOCK_REMOTE_CLOSED);
+      }
+      else
+      {
+         break;
+      }
+   }
+   return ret;
 }
 
-int ICommand::sendOrder(ossSocket &sock, OnMsgBuild onMsgBuild) {
-    int ret = EDB_OK;
-    bson::BSONObj bsonData;
-    try{
-        bsonData = bson::fromjson(_jsonString);
-    }catch(std::exception &e){
-        return getError(EDB_INVALID_RECORD);
-    }
-    memset(_sendBuf, 0, SEND_BUF_SIZE);
-    int size = SEND_BUF_SIZE;
-    char *pSendBuf = _sendBuf;
-    ret = onMsgBuild(&pSendBuf, &size, bsonData);
-    if(ret){
-        return getError(EDB_MSG_BUILD_FAILED);
-    }
-    ret = sock.send(pSendBuf, *(int *)pSendBuf);
-    if(ret){
-        return getError(EDB_SOCK_SEND_FAILD);
-    }
+int ICommand::sendOrder( ossSocket & sock, OnMsgBuild onMsgBuild  )
+{
+   int ret = EDB_OK;
+   bson::BSONObj bsonData;
+   try {
+      bsonData = bson::fromjson(_jsonString);
+   } catch( std::exception & e) {
+      return getError(EDB_INVALID_RECORD);
+   }
+   memset(_sendBuf,0, SEND_BUF_SIZE);
+   int size = SEND_BUF_SIZE;
+   char * pSendBuf = _sendBuf;
+   ret = onMsgBuild(&pSendBuf, &size, bsonData);
+   if(ret)
+   {
+      return getError(EDB_MSG_BUILD_FAILED);
+   }
+   ret = sock.send( pSendBuf, *(int*)pSendBuf );
+   if(ret)
+   {
+      return getError(EDB_SOCK_SEND_FAILD);
+   }
+   return ret;
 
-    return ret;
 }
 
-int ICommand::sendOrder(ossSocket &sock, int opCode) {
-    int ret = EDB_OK;
-    memset(_sendBuf, 0, SEND_BUF_SIZE);
-    char *pSendBuf = _sendBuf;
-    const char *pStr = "hello world";
-    *(int *)pSendBuf = strlen(pStr) + 1 + sizeof(int);
-    ret = sock.send(pSendBuf, *(int *)pSendBuf);
-    return ret;
+int ICommand::sendOrder( ossSocket & sock, int opCode )
+{
+   int ret = EDB_OK;
+   memset(_sendBuf, 0, SEND_BUF_SIZE);
+   char * pSendBuf = _sendBuf;
+   const char *pStr = "hello world" ;
+   *(int*)pSendBuf=strlen(pStr)+1 + sizeof(int) ;
+   memcpy ( &pSendBuf[4], pStr, strlen(pStr)+1 ) ;
+   /*MsgHeader *header = (MsgHeader*)pSendBuf;
+   header->messageLen = sizeof(MsgHeader);
+   header->opCode = opCode;*/
+   ret = sock.send(pSendBuf, *(int*)pSendBuf);
+   return ret;
 }
 
-/*******************************ConnectCommand*****************************/
-int ConnectCommand::execute(ossSocket &sock, std::vector<std::string> &argVec) {
-    int ret = EDB_OK;
-    _address = argVec[0];
-    _port = atoi(argVec[1].c_str());
-    sock.close();
-    sock.setAddress(_address.c_str(), _port);
-    ret = sock.initSocket();
-    if(ret){
-        return getError(EDB_SOCK_INIT_FAILED);
-    }
-    ret = sock.connect();
-    if(ret){
-        return getError(EDB_SOCK_CONNECT_FAILED);
-    }
-    sock.disableNagle();
-    return ret;
-}
-/******************************QuitCommand**********************************/
-int QuitCommand::handleReply() {
-    int ret = EDB_OK;
-    //gQuit = -1;
-    return ret;
+/******************************InsertCommand**********************************************/
+int InsertCommand::handleReply()
+{
+/*   MsgReply * msg = (MsgReply*)_recvBuf;
+   int returnCode = msg->returnCode;
+   int ret = getError(returnCode);
+   return ret;*/
+   return EDB_OK ;
 }
 
-int QuitCommand::execute(ossSocket &sock, std::vector<std::string> &argVec) {
-    int ret = EDB_OK;
-    if(!sock.isConnected()){
-        return getError(EDB_SOCK_NOT_CONNECT);
-    }
-    ret = sendOrder(sock, 0);
-    //sock.close();
-    ret = handleReply();
-    return ret;
+int InsertCommand::execute( ossSocket & sock, std::vector<std::string> & argVec )
+{
+   int rc = EDB_OK;
+   if( argVec.size() <1 )
+   {
+      return getError(EDB_INSERT_INVALID_ARGUMENT);
+   }
+   _jsonString = argVec[0];
+     if( !sock.isConnected() )
+   {
+      return getError(EDB_SOCK_NOT_CONNECT);
+   }
+
+   rc = sendOrder( sock, 0 );
+   PD_RC_CHECK ( rc, PDERROR, "Failed to send order, rc = %d", rc ) ;
+
+   rc = recvReply( sock );
+   PD_RC_CHECK ( rc, PDERROR, "Failed to receive reply, rc = %d", rc ) ;
+   rc = handleReply();
+   PD_RC_CHECK ( rc, PDERROR, "Failed to receive reply, rc = %d", rc ) ;
+done :
+   return rc;
+error :
+   goto done ;
 }
 
-/******************************HelpCommand**********************************/
+/******************************ConnectCommand****************************************/
+int ConnectCommand::execute( ossSocket & sock, std::vector<std::string> & argVec )
+{
+   int ret = EDB_OK;
+   _address = argVec[0];
+   _port = atoi(argVec[1].c_str());
+   sock.close();
+   sock.setAddress(_address.c_str(), _port);
+   ret = sock.initSocket();
+   if(ret)
+   {
+      return getError(EDB_SOCK_INIT_FAILED);
+   }
+   ret = sock.connect();
+   if(ret)
+   {
+      return getError(EDB_SOCK_CONNECT_FAILED);
+   }
+   sock.disableNagle();
+   return ret;
+}
+/******************************QuitCommand**********************************************/
+int QuitCommand::handleReply()
+{
+   int ret = EDB_OK;
+   gQuit = 1;
+   return ret;
+}
+
+int QuitCommand::execute( ossSocket & sock, std::vector<std::string> & argVec )
+{
+   int ret = EDB_OK;
+   if( !sock.isConnected() )
+   {
+      return getError(EDB_SOCK_NOT_CONNECT);
+   }
+   ret = sendOrder( sock, 0 );
+   sock.close();
+   ret = handleReply();
+   return ret;
+}
+/******************************HelpCommand**********************************************/
 int HelpCommand::execute( ossSocket & sock, std::vector<std::string> & argVec )
 {
-    int ret = EDB_OK;
-    printf("List of classes of commands:\n\n");
-    printf("%s [server] [port]-- connecting emeralddb server\n", COMMAND_CONNECT);
-    printf("%s -- sending a insert command to emeralddb server\n", COMMAND_INSERT);
-    printf("%s -- sending a query command to emeralddb server\n", COMMAND_QUERY);
-    printf("%s -- sending a delete command to emeralddb server\n", COMMAND_DELETE);
-    printf("%s [number]-- sending a test command to emeralddb server\n", COMMAND_TEST);
-    printf("%s -- providing current number of record inserting\n", COMMAND_SNAPSHOT);
-    printf("%s -- quitting command\n\n", COMMAND_QUIT);
-    printf("Type \"help\" command for help\n");
-    return ret;
+   int ret = EDB_OK;
+   printf("List of classes of commands:\n\n");
+   printf("%s [server] [port]-- connecting emeralddb server\n", COMMAND_CONNECT);
+   printf("%s -- sending a insert command to emeralddb server\n", COMMAND_INSERT);
+   printf("%s -- sending a query command to emeralddb server\n", COMMAND_QUERY);
+   printf("%s -- sending a delete command to emeralddb server\n", COMMAND_DELETE);
+   printf("%s [number]-- sending a test command to emeralddb server\n", COMMAND_TEST);
+   printf("%s -- providing current number of record inserting\n", COMMAND_SNAPSHOT);
+   printf("%s -- quitting command\n\n", COMMAND_QUIT);
+   printf("Type \"help\" command for help\n");
+   return ret;
 }
+

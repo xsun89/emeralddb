@@ -1,7 +1,25 @@
+/*******************************************************************************
+   Copyright (C) 2013 SequoiaDB Software Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License, version 3,
+   as published by the Free Software Foundation.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program. If not, see <http://www.gnu.org/license/>.
+*******************************************************************************/
 #include "core.hpp"
 #include "pmd.hpp"
 #include "pmdOptions.hpp"
 #include "pd.hpp"
+#include "pmdEDUMgr.hpp"
+
+
 static int pmdResolveArguments ( int argc, char **argv )
 {
    int rc = EDB_OK ;
@@ -113,44 +131,55 @@ static void pmdSignalHandler ( int sigNum )
    }
 }
 
-static int pmdSetupSignalHandler()
-{
-	int rc = EDB_OK;
-	struct sigaction newact;
-	memset(&newact, 0, sizeof(newact));
-	sigemptyset(&newact.sa_mask);
 
-	newact.sa_flags = 0;
-	newact.sa_handler = (__sighandler_t)pmdSignalHandler;
-	for(int i=1; i<PMD_MAX_SIGNALS; ++i)
-	{
-		sigaction(i+1, &newact, NULL);
-	}
-    return rc;
+static int pmdSetupSignalHandler ()
+{
+   int rc = EDB_OK ;
+   struct sigaction newact ;
+   memset ( &newact, 0, sizeof(newact) ) ;
+   sigemptyset ( &newact.sa_mask ) ;
+
+   newact.sa_flags = 0 ;
+   newact.sa_handler = (__sighandler_t ) pmdSignalHandler ;
+   for ( int i = 0; i < PMD_MAX_SIGNALS; ++i )
+   {
+      sigaction ( i+1, &newact, NULL ) ;
+   }
+   return rc ;
 }
 
-int pmdMasterThreadMain(int argc, char **argv)
+int pmdMasterThreadMain ( int argc, char **argv )
 {
-	int rc = EDB_OK;
-	EDB_KRCB *krcb = pmdGetKRCB();
-	rc = pmdSetupSignalHandler();
-	PD_RC_CHECK(rc, PDERROR, "Failed to setup signal handler, rc=%d", rc);
-	rc = pmdResolveArguments( argc, argv);
-	if(EDB_PMD_HELP_ONLY == rc)
-	{
-		goto done;
-	}
-	PD_RC_CHECK(rc, PDERROR, "Failed to resolve arguments, rc=%d", rc);
-	while(EDB_IS_DB_UP)
-	{
-		sleep(1);
-	}
-done:
-	return rc;
-error:
-	goto done;
+   int rc = EDB_OK ;
+   EDB_KRCB *krcb = pmdGetKRCB () ;
+   pmdEDUMgr *eduMgr   = krcb->getEDUMgr () ;
+   EDUID      agentEDU = PMD_INVALID_EDUID ;
+
+   // signal handler
+   rc = pmdSetupSignalHandler () ;
+   PD_RC_CHECK ( rc, PDERROR, "Failed to setup signal handler, rc = %d", rc ) ;
+
+   // arguments
+   rc = pmdResolveArguments ( argc, argv ) ;
+   if ( EDB_PMD_HELP_ONLY == rc )
+   {
+      goto done ;
+   }
+   PD_RC_CHECK ( rc, PDERROR, "Failed to resolve argument, rc = %d", rc ) ;
+
+   rc = eduMgr->startEDU ( EDU_TYPE_TCPLISTENER, NULL, &agentEDU ) ;
+   PD_RC_CHECK ( rc, PDERROR, "Failed to start tcplistener edu, rc = %d", rc ) ;
+   while ( EDB_IS_DB_UP )
+   {
+      sleep(1) ;
+   }
+done :
+   return rc ;
+error :
+   goto done ;
 }
+
 int main ( int argc, char **argv )
 {
-    return pmdMasterThreadMain(argc, argv);
+   return pmdMasterThreadMain ( argc, argv ) ;
 }
